@@ -8,7 +8,7 @@ function [ data ] = LI_powerAverage( cfg ,data )
 % where the input data has to be a result of LI_PSD
 %
 % The configuration options are
-%   cfg.ferqrange = frequency range, [beg end] (default: [7 9]
+%   cfg.freqrange = frequency range [fmin fmax] (default: [7 9]
 %
 % This function requires the fieldtrip toolbox
 
