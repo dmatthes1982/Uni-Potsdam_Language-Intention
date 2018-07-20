@@ -19,8 +19,8 @@ cprintf([0,0.6,0], '<strong>---------------------------------------------</stron
 % -------------------------------------------------------------------------
 % Path settings
 % -------------------------------------------------------------------------
-srcPath = '/home/raid/dmatthes/MATLAB/data/LanguageIntention/eegData/EEG_LI_processedBVA/';
-desPath = '/home/raid/dmatthes/MATLAB/data/LanguageIntention/eegData/EEG_LI_processedFT/';
+srcPath = '/data/tu_dmatthes_cloud/LanguageIntention/eegData/EEG_LI_processedBVA/';
+desPath = '/data/tu_dmatthes_cloud/LanguageIntention/eegData/EEG_LI_processedFT/';
 
 fprintf('\nThe default paths are:\n');
 fprintf('Source: %s\n',srcPath);
@@ -67,11 +67,17 @@ end
 if ~exist(strcat(desPath, '02b_pwelch'), 'dir')
   mkdir(strcat(desPath, '02b_pwelch'));
 end
-if ~exist(strcat(desPath, '03a_avgpow7to9'), 'dir')
-  mkdir(strcat(desPath, '03a_avgpow7to9'));
+if ~exist(strcat(desPath, '03a_psd_avgpow6to9'), 'dir')
+  mkdir(strcat(desPath, '03a_psd_avgpow6to9'));
 end
-if ~exist(strcat(desPath, '03b_avgpow6to9'), 'dir')
-  mkdir(strcat(desPath, '03b_avgpow6to9'));
+if ~exist(strcat(desPath, '03b_pwelch_avgpow6to9'), 'dir')
+  mkdir(strcat(desPath, '03b_pwelch_avgpow6to9'));
+end
+if ~exist(strcat(desPath, '03c_psd_avgpow7to9'), 'dir')
+  mkdir(strcat(desPath, '03c_psd_avgpow7to9'));
+end
+if ~exist(strcat(desPath, '03d_pwelch_avgpow7to9'), 'dir')
+  mkdir(strcat(desPath, '03d_pwelch_avgpow7to9'));
 end
 
 clear sessionStr numOfPart part newPaths
@@ -192,7 +198,7 @@ else
     fprintf('\nPlease select what you want to do with the selected dyads:\n');
     fprintf('[1] - Data import, bad segments and pre-stimulus offset rejection\n');
     fprintf('[2] - Power analysis\n');
-    fprintf('[3] - Averaging over frequencies\n');
+    fprintf('[3] - Averaging power over frequencies\n');
     fprintf('[4] - Quit data processing\n\n');
     x = input('Option: ');
   
@@ -241,13 +247,13 @@ switch part
   case 2
     tmpPath = strcat(desPath, '01c_pruned/');
     fileNamePre = strcat(tmpPath, 'LI_incong_p*_01c_pruned_', sessionStr, '.mat');
-    tmpPath = strcat(desPath, '02_pwelch/');
-    fileNamePost = strcat(tmpPath, 'LI_incong_p*_02_pwelch_', sessionStr, '.mat');
+    tmpPath = strcat(desPath, '02b_pwelch/');
+    fileNamePost = strcat(tmpPath, 'LI_incong_p*_02b_pwelch_', sessionStr, '.mat');
   case 3
-    tmpPath = strcat(desPath, '02_pwelch/');
-    fileNamePre = strcat(tmpPath, 'LI_incong_p*_02_pwelch_', sessionStr, '.mat');
-    tmpPath = strcat(desPath, '03b_avgpow6to9/');
-    fileNamePost = strcat(tmpPath, 'LI_incong_p*_3b_avgpow6to9', sessionStr, '.mat');
+    tmpPath = strcat(desPath, '02b_pwelch/');
+    fileNamePre = strcat(tmpPath, 'LI_incong_p*_02b_pwelch_', sessionStr, '.mat');
+    tmpPath = strcat(desPath, '03d_pwelch_avgpow7to9/');
+    fileNamePost = strcat(tmpPath, 'LI_incong_p*_03d_pwelch_avgpow7to9', sessionStr, '.mat');
   otherwise
     error('Something unexpected happend. part = %d is not defined' ...
           , part);
@@ -379,7 +385,7 @@ while sessionStatus == true
       selection = false;
       while selection == false
         fprintf('<strong>Continue data processing with:</strong>\n');
-        fprintf('<strong>[3] - Averaging over frequencies?</strong>\n');
+        fprintf('<strong>[3] - Averaging power over frequencies?</strong>\n');
         x = input('\nSelect [y/n]: ','s');
         if strcmp('y', x)
           selection = true;

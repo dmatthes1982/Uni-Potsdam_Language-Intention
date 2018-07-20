@@ -6,7 +6,7 @@ function [ num ] = LI_getSessionNum( cfg )
 %   [ num ] = LI_getSessionNum( cfg )
 %
 % The configuration options are
-%   cfg.desFolder   = destination folder (default: '/home/raid/dmatthes/MATLAB/data/LanguageIntention/eegData/EEG_LI_processedFT/')
+%   cfg.desFolder   = destination folder (default: '/data/tu_dmatthes_cloud/LanguageIntention/eegData/EEG_LI_processedFT/')
 %   cfg.subFolder   = name of subfolder (default: '01a_import/')
 %   cfg.filename    = filename (default: 'LI_incong_p01_01a_import')
 %
@@ -17,7 +17,7 @@ function [ num ] = LI_getSessionNum( cfg )
 % -------------------------------------------------------------------------
 % Get config options
 % -------------------------------------------------------------------------
-desFolder   = ft_getopt(cfg, 'desFolder', '/home/raid/dmatthes/MATLAB/data/LanguageIntention/eegData/EEG_LI_processedFT/');
+desFolder   = ft_getopt(cfg, 'desFolder', '/data/tu_dmatthes_cloud/LanguageIntention/eegData/EEG_LI_processedFT/');
 subFolder   = ft_getopt(cfg, 'subFolder', '01a_import/');
 filename    = ft_getopt(cfg, 'filename', 'LI_incong_p01_01a_import');
 

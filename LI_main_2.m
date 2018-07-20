@@ -10,7 +10,7 @@ if ~exist('sessionStr', 'var')
 end
 
 if ~exist('desPath', 'var')
-  desPath = ['/home/raid/dmatthes/MATLAB/data/LanguageIntention/'...        % destination path for processed data
+  desPath = ['/data/tu_dmatthes_cloud/LanguageIntention/'...                % destination path for processed data
              'eegData/EEG_LI_processedFT/'];
 end
 
@@ -31,7 +31,7 @@ end
 
 %% part 2
 % 1. estimate the power spectral density for each trial without 
-%     subsegmentation and average over trials.
+%    subsegmentation and average over trials.
 % 2. estimate the power spectral using Welch's method for each trial and
 %    average over trials. (segment length 1 sec, overlapping 60% --> each
 %    trial will be divided into 2 subsegments)

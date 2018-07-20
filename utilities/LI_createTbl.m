@@ -6,7 +6,7 @@ function LI_createTbl( cfg )
 %   JAI_createTbl( cfg )
 %
 % The configuration options are
-%   cfg.desFolder   = destination folder (default: '/home/raid/dmatthes/MATLAB/data/LanguageIntention/eegData/EEG_LI_processedFT/00_settings/')
+%   cfg.desFolder   = destination folder (default: '/data/tu_dmatthes_cloud/LanguageIntention/eegData/EEG_LI_processedFT/00_settings/')
 %   cfg.type        = type of documentation file (options: 'numoftrials')
 %   cfg.sessionStr  = number of session, format: %03d, i.e.: '003' (default: '001')
 %
@@ -21,7 +21,7 @@ function LI_createTbl( cfg )
 % Get config options
 % -------------------------------------------------------------------------
 desFolder   = ft_getopt(cfg, 'desFolder', ...
-          '/home/raid/dmatthes/MATLAB/data/LanguageIntention/eegData/EEG_LI_processedFT/00_settings/');
+          '/data/tu_dmatthes_cloud/LanguageIntention/eegData/EEG_LI_processedFT/00_settings/');
 type        = ft_getopt(cfg, 'type', []);
 sessionStr  = ft_getopt(cfg, 'sessionStr', []);
 

@@ -1,7 +1,7 @@
 if ~exist('sessionStr', 'var')
   cfg           = [];
-  cfg.subFolder = '01b_revised/';
-  cfg.filename  = 'LI_incong_p30_01b_revised';
+  cfg.subFolder = '01a_import/';
+  cfg.filename  = 'LI_incong_p30_01a_import';
   sessionNum    = LI_getSessionNum( cfg );
   if sessionNum == 0
     sessionNum = 1;
@@ -10,12 +10,12 @@ if ~exist('sessionStr', 'var')
 end
 
 if ~exist('srcPath', 'var')
-  srcPath = ['/home/raid/dmatthes/MATLAB/data/LanguageIntention/'...        % source path to raw data
+  srcPath = ['/data/tu_dmatthes_cloud/LanguageIntention/'...                % source path to raw data
              'eegData/EEG_LI_processedBVA/'];                  
 end
 
 if ~exist('desPath', 'var')
-  desPath = ['/home/raid/dmatthes/MATLAB/data/LanguageIntention/'...        % destination path for processed data
+  desPath = ['/data/tu_dmatthes_cloud/LanguageIntention/'...                % destination path for processed data
              'eegData/EEG_LI_processedFT/'];
 end
 
@@ -45,7 +45,7 @@ fprintf('\n');
 for i = numOfPart
   fprintf('<strong>Paricipant %d</strong>\n\n', i);
   
-  % congruent data
+  % congruent data --------------------------------------------------------
   cfg           = [];
   cfg.path      = srcPath;
   cfg.part      = i;
@@ -69,7 +69,7 @@ for i = numOfPart
   fprintf('Data stored!\n\n');
   clear data_import
   
-  % incongruent data
+  % incongruent data ------------------------------------------------------
   cfg           = [];
   cfg.path      = srcPath;
   cfg.part      = i;
@@ -110,7 +110,7 @@ for i = numOfPart
     LI_createTbl(cfg);                                                      % create number of trials file
   end
 
-  % congruent data
+  % congruent data --------------------------------------------------------
   cfg             = [];
   cfg.srcFolder   = strcat(desPath, '01a_import/');
   cfg.filename    = sprintf('LI_cong_p%02d_01a_import', i);
@@ -142,7 +142,7 @@ for i = numOfPart
   fprintf('Data stored!\n\n');
   clear data_import data_revised
   
-  % incongruent data
+  % incongruent data ------------------------------------------------------
   cfg             = [];
   cfg.srcFolder   = strcat(desPath, '01a_import/');
   cfg.filename    = sprintf('LI_incong_p%02d_01a_import', i);
@@ -196,7 +196,7 @@ end
 for i = numOfPart
   fprintf('<strong>Participant %d</strong>\n\n', i);
   
-  % congruent data
+  % congruent data --------------------------------------------------------
   cfg             = [];
   cfg.srcFolder   = strcat(desPath, '01b_revised/');
   cfg.filename    = sprintf('LI_cong_p%02d_01b_revised', i);
@@ -226,7 +226,7 @@ for i = numOfPart
   fprintf('Data stored!\n\n');
   clear data_revised data_pruned
   
-  % incongruent data
+  % incongruent data ------------------------------------------------------
   cfg             = [];
   cfg.srcFolder   = strcat(desPath, '01b_revised/');
   cfg.filename    = sprintf('LI_incong_p%02d_01b_revised', i);

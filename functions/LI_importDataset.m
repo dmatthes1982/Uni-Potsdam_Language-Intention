@@ -6,7 +6,7 @@ function [ data ] = LI_importDataset( cfg )
 %   [ data ] = LI_importDataset( cfg )
 %
 % The configuration options are
-%   cfg.path      = source path ('i.e. 'home/raid/dmatthes/MATLAB/data/LanguageIntention/eegData/EEG_LI_processedBVA/')
+%   cfg.path      = source path ('i.e. '/data/tu_dmatthes_cloud/LanguageIntention/eegData/EEG_LI_processedBVA/')
 %   cfg.part      = number of participant
 %   cfg.condition = condition string, available options: 'incong' and 'cong'
 %
