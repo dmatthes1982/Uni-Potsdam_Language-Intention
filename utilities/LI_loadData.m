@@ -5,7 +5,7 @@ function LI_loadData( cfg )
 %   LI_loadData( cfg )
 %
 % The configuration options are
-%   cfg.srcFolder   = source folder (default: '/data/pt_01826/eegData/DualEEG_LI_processedData/01a_import/')
+%   cfg.srcFolder   = source folder (default: '/home/raid/dmatthes/MATLAB/data/LanguageIntention/eegData/EEG_LI_processedFT/01a_import/')
 %   cfg.filename    = filename (default: 'LI_incong_p01_01a_import')
 %   cfg.sessionStr  = number of session, format: %03d, i.e.: '003' (default: '001')
 %

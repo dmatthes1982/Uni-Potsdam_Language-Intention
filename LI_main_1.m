@@ -54,6 +54,7 @@ for i = numOfPart
   fprintf('<strong>Import congruent data</strong> from: \n%s ...\n\n', cfg.path);
   data_import = LI_importDataset( cfg );
   
+  % export imported data in a *.mat file
   cfg             = [];
   cfg.desFolder   = strcat(desPath, '01a_import/');
   cfg.filename    = sprintf('LI_cong_p%02d_01a_import', i);
@@ -77,6 +78,7 @@ for i = numOfPart
   fprintf('<strong>Import incongruent data</strong> from: \n%s ...\n\n', cfg.path);
   data_import = LI_importDataset( cfg );
   
+  % export imported data in a *.mat file
   cfg             = [];
   cfg.desFolder   = strcat(desPath, '01a_import/');
   cfg.filename    = sprintf('LI_incong_p%02d_01a_import', i);
@@ -96,6 +98,18 @@ end
 for i = numOfPart
   fprintf('<strong>Participant %d</strong>\n\n', i);
   
+  % Create settings file if not existing
+  NoT_file = [desPath '00_settings/' ...
+                    sprintf('numoftrials_%s', sessionStr) '.xls'];
+  if ~(exist(NoT_file, 'file') == 2)                                        % check if number of trials file already exist
+    cfg = [];
+    cfg.desFolder   = [desPath '00_settings/'];
+    cfg.type        = 'numoftrials';
+    cfg.sessionStr  = sessionStr;
+
+    LI_createTbl(cfg);                                                      % create number of trials file
+  end
+
   % congruent data
   cfg             = [];
   cfg.srcFolder   = strcat(desPath, '01a_import/');
@@ -108,6 +122,12 @@ for i = numOfPart
   % reject segments with bad intervals
   data_revised = LI_rejectBadIntervalArtifacts(data_import);
   
+  numOfTrialsCong = length(data_import.trial);
+  CongTrials      = 1:1:numOfTrialsCong;
+  CongBadTrials   = CongTrials(~ismember(CongTrials, ...
+                      data_revised.sampleinfo(:,2)/1500));
+
+  % export revised data in a *.mat file
   cfg             = [];
   cfg.desFolder   = strcat(desPath, '01b_revised/');
   cfg.filename    = sprintf('LI_cong_p%02d_01b_revised', i);
@@ -134,6 +154,12 @@ for i = numOfPart
   % reject segments with bad intervals
   data_revised = LI_rejectBadIntervalArtifacts(data_import);
   
+  numOfTrialsInCong = length(data_import.trial);
+  IncongTrials      = 1:1:numOfTrialsInCong;
+  IncongBadTrials   = IncongTrials(~ismember(IncongTrials, ...
+                      data_revised.sampleinfo(:,2)/1500));
+
+  % export revised data in a *.mat file
   cfg             = [];
   cfg.desFolder   = strcat(desPath, '01b_revised/');
   cfg.filename    = sprintf('LI_incong_p%02d_01b_revised', i);
@@ -147,6 +173,23 @@ for i = numOfPart
   LI_saveData(cfg, 'data_revised', data_revised);
   fprintf('Data stored!\n\n');
   clear data_import data_revised
+
+  % Load number of trials file
+  T = readtable(NoT_file);
+  warning off;
+  T.participant(numOfPart - 29) = numOfPart;
+  T.congNoT(numOfPart - 29)     = numOfTrialsCong;
+  T.incongNoT(numOfPart - 29)   = numOfTrialsInCong;
+  T.congBad(numOfPart - 29)     = {vec2str(CongBadTrials, [], [], 0)};
+  T.incongBad(numOfPart - 29)   = {vec2str(IncongBadTrials, [], [], 0)};
+  warning on;
+
+  clear numOfTrialsCong numOfTrialsInCong CongBadTrials IncongBadTrials ...
+        CongTrials IncongTrials
+
+  % store settings table
+  delete(NoT_file);
+  writetable(T, NoT_file);
 end
 
 %% prune segments %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -215,4 +258,4 @@ for i = numOfPart
 end
 
 %% clear workspace
-clear i cfg file_path
+clear i cfg file_path T NoT_file
