@@ -177,11 +177,11 @@ for i = numOfPart
   % Load number of trials file
   T = readtable(NoT_file);
   warning off;
-  T.participant(numOfPart - 29) = numOfPart;
-  T.congNoT(numOfPart - 29)     = numOfTrialsCong;
-  T.incongNoT(numOfPart - 29)   = numOfTrialsInCong;
-  T.congBad(numOfPart - 29)     = {vec2str(CongBadTrials, [], [], 0)};
-  T.incongBad(numOfPart - 29)   = {vec2str(IncongBadTrials, [], [], 0)};
+  T.participant(i - 29) = i;
+  T.congNoT(i - 29)     = numOfTrialsCong;
+  T.incongNoT(i - 29)   = numOfTrialsInCong;
+  T.congBad(i - 29)     = {vec2str(CongBadTrials, [], [], 0)};
+  T.incongBad(i - 29)   = {vec2str(IncongBadTrials, [], [], 0)};
   warning on;
 
   clear numOfTrialsCong numOfTrialsInCong CongBadTrials IncongBadTrials ...

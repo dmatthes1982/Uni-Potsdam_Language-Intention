@@ -61,8 +61,11 @@ end
 if ~exist(strcat(desPath, '01c_pruned'), 'dir')
   mkdir(strcat(desPath, '01c_pruned'));
 end
-if ~exist(strcat(desPath, '02_pwelch'), 'dir')
-  mkdir(strcat(desPath, '02_pwelch'));
+if ~exist(strcat(desPath, '02a_psd'), 'dir')
+  mkdir(strcat(desPath, '02a_psd'));
+end
+if ~exist(strcat(desPath, '02b_pwelch'), 'dir')
+  mkdir(strcat(desPath, '02b_pwelch'));
 end
 if ~exist(strcat(desPath, '03a_avgpow7to9'), 'dir')
   mkdir(strcat(desPath, '03a_avgpow7to9'));
@@ -188,7 +191,7 @@ else
   while selection == false
     fprintf('\nPlease select what you want to do with the selected dyads:\n');
     fprintf('[1] - Data import, bad segments and pre-stimulus offset rejection\n');
-    fprintf('[2] - Power analysis (pWelch)\n');
+    fprintf('[2] - Power analysis\n');
     fprintf('[3] - Averaging over frequencies\n');
     fprintf('[4] - Quit data processing\n\n');
     x = input('Option: ');
@@ -275,9 +278,9 @@ if ~isequal(fileNamePre, 0)
   end
 
   if strcmp(dyadsSpec, 'all')                                               % process all participants
-    numOfPart = numOfPrePart;
+    numOfPart = sort(numOfPrePart);
   elseif strcmp(dyadsSpec, 'specific')                                      % process specific participants
-    y = sprintf('%d ', numOfPrePart);
+    y = sprintf('%d ', sort(numOfPrePart));
     
     selection = false;
     
@@ -321,6 +324,8 @@ if ~isequal(fileNamePre, 0)
               numOfFiles sessionNum numOfSessions session numOfPart ...
               part sessionStr dyads tmpPath
         return;
+      else
+        numOfPart = sort(numOfPart);
       end
     end
   end
@@ -356,7 +361,7 @@ while sessionStatus == true
       selection = false;
       while selection == false
         fprintf('<strong>Continue data processing with:</strong>\n');
-        fprintf('<strong>[2] - Power analysis (pWelch)?</strong>\n');
+        fprintf('<strong>[2] - Power analysis?</strong>\n');
         x = input('\nSelect [y/n]: ','s');
         if strcmp('y', x)
           selection = true;
