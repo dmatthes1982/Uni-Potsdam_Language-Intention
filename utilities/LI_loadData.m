@@ -5,7 +5,7 @@ function LI_loadData( cfg )
 %   LI_loadData( cfg )
 %
 % The configuration options are
-%   cfg.srcFolder   = source folder (default: '/data/tu_dmatthes_cloud/LanguageIntention/eegData/EEG_LI_processedFT/01a_import/')
+%   cfg.srcFolder   = source folder (default: '/data/tu_dmatthes_temp/LanguageIntention/eegData/EEG_LI_processedFT/01a_import/')
 %   cfg.filename    = filename (default: 'LI_incong_p01_01a_import')
 %   cfg.sessionStr  = number of session, format: %03d, i.e.: '003' (default: '001')
 %
@@ -18,7 +18,7 @@ function LI_loadData( cfg )
 % -------------------------------------------------------------------------
 % Get config options
 % -------------------------------------------------------------------------
-srcFolder   = ft_getopt(cfg, 'srcFolder', '/data/tu_dmatthes_cloud/LanguageIntention/eegData/EEG_LI_processedFT/01a_import/');
+srcFolder   = ft_getopt(cfg, 'srcFolder', '/data/tu_dmatthes_temp/LanguageIntention/eegData/EEG_LI_processedFT/01a_import/');
 filename    = ft_getopt(cfg, 'filename', 'LI_incong_p01_01a_import');
 sessionStr  = ft_getopt(cfg, 'sessionStr', '001');
 

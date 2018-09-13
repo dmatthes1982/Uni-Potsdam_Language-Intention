@@ -10,7 +10,7 @@ if ~exist('sessionStr', 'var')
 end
 
 if ~exist('desPath', 'var')
-  desPath = ['/data/tu_dmatthes_cloud/LanguageIntention/'...                % destination path for processed data
+  desPath = ['/data/tu_dmatthes_temp/LanguageIntention/'...                 % destination path for processed data
              'eegData/EEG_LI_processedFT/'];
 end
 

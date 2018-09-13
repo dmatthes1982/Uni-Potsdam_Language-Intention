@@ -19,8 +19,8 @@ cprintf([0,0.6,0], '<strong>---------------------------------------------</stron
 % -------------------------------------------------------------------------
 % Path settings
 % -------------------------------------------------------------------------
-srcPath = '/data/tu_dmatthes_cloud/LanguageIntention/eegData/EEG_LI_processedBVA/';
-desPath = '/data/tu_dmatthes_cloud/LanguageIntention/eegData/EEG_LI_processedFT/';
+srcPath = '/data/tu_dmatthes_temp/LanguageIntention/eegData/EEG_LI_processedBVA/';
+desPath = '/data/tu_dmatthes_temp/LanguageIntention/eegData/EEG_LI_processedFT/';
 
 fprintf('\nThe default paths are:\n');
 fprintf('Source: %s\n',srcPath);

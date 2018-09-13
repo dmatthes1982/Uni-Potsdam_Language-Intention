@@ -53,7 +53,7 @@ end
 if isempty(part) || isempty(condition)                                      % if part number or condition identifier is not specified
   event = [];                                                               % the associated markers cannot be loaded and displayed
 else                                                                        % else, load the stimulus markers 
-  source = ['/data/tu_dmatthes_cloud/LanguageIntention/eegData/'...
+  source = ['/data/tu_dmatthes_temp/LanguageIntention/eegData/'...
             'EEG_LI_processedBVA/'];
   filename = sprintf('*%02d_%s_BL.vhdr', part, condition);
   file_List = dir([source filename]);

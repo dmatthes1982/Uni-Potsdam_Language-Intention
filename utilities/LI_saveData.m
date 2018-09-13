@@ -6,7 +6,7 @@ function LI_saveData( cfg, varargin )
 %   LI_saveData( cfg, varargin )
 %
 % The configuration options are
-%   cfg.desFolder   = destination folder (default: '/data/tu_dmatthes_cloud/LanguageIntention/eegData/EEG_LI_processedFT/01a_import/')
+%   cfg.desFolder   = destination folder (default: '/data/tu_dmatthes_temp/LanguageIntention/eegData/EEG_LI_processedFT/01a_import/')
 %   cfg.filename    = filename (default: 'LI_incong_p01_01a_import')
 %   cfg.sessionStr  = number of session, format: %03d, i.e.: '003' (default: '001')
 %
@@ -19,7 +19,7 @@ function LI_saveData( cfg, varargin )
 % -------------------------------------------------------------------------
 % Get config options
 % -------------------------------------------------------------------------
-desFolder   = ft_getopt(cfg, 'desFolder', '/data/tu_dmatthes_cloud/LanguageIntention/eegData/EEG_LI_processedFT/01a_import/');
+desFolder   = ft_getopt(cfg, 'desFolder', '/data/tu_dmatthes_temp/LanguageIntention/eegData/EEG_LI_processedFT/01a_import/');
 filename    = ft_getopt(cfg, 'filename', 'LI_incong_p01_01a_import');
 sessionStr  = ft_getopt(cfg, 'sessionStr', '001');
 
