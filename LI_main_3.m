@@ -133,7 +133,7 @@ for i = numOfPart
   fprintf('Data stored!\n\n');
   clear data_pwelchavg data_pwelch 
   
-  % incongruent data --------------------------------------------------------
+  % incongruent data ------------------------------------------------------
   cfg             = [];
   cfg.srcFolder   = strcat(desPath, '02a_psd/');
   cfg.filename    = sprintf('LI_incong_p%02d_02a_psd', i);

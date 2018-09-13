@@ -79,6 +79,9 @@ end
 if ~exist(strcat(desPath, '03d_pwelch_avgpow7to9'), 'dir')
   mkdir(strcat(desPath, '03d_pwelch_avgpow7to9'));
 end
+if ~exist(strcat(desPath, '04_rmanova'), 'dir')
+  mkdir(strcat(desPath, '04_rmanova'));
+end
 
 clear sessionStr numOfPart part newPaths
 
@@ -199,7 +202,8 @@ else
     fprintf('[1] - Data import, bad segments and pre-stimulus offset rejection\n');
     fprintf('[2] - Power analysis\n');
     fprintf('[3] - Averaging power over frequencies\n');
-    fprintf('[4] - Quit data processing\n\n');
+    fprintf('[4] - Repeated measures ANOVA (rmANOVA)\n'); 
+    fprintf('[5] - Quit data processing\n\n');
     x = input('Option: ');
   
     switch x
@@ -213,6 +217,9 @@ else
         part = 3;
         selection = true;
       case 4
+        part = 4;
+        selection = true;
+      case 5
         fprintf('\nData processing aborted.\n');
         clear selection i x y srcPath desPath session sessionList ...
             sessionNum numOfSessions dyadsSpec sessionStr
@@ -253,7 +260,12 @@ switch part
     tmpPath = strcat(desPath, '02b_pwelch/');
     fileNamePre = strcat(tmpPath, 'LI_incong_p*_02b_pwelch_', sessionStr, '.mat');
     tmpPath = strcat(desPath, '03d_pwelch_avgpow7to9/');
-    fileNamePost = strcat(tmpPath, 'LI_incong_p*_03d_pwelch_avgpow7to9', sessionStr, '.mat');
+    fileNamePost = strcat(tmpPath, 'LI_incong_p*_03d_pwelch_avgpow7to9_', sessionStr, '.mat');
+  case 4
+    tmpPath = strcat(desPath, '03d_pwelch_avgpow7to9/');
+    fileNamePre = strcat(tmpPath, 'LI_incong_p*_03d_pwelch_avgpow7to9_', sessionStr, '.mat');
+    tmpPath = strcat(desPath, '04_rmanova/');
+    fileNamePost = strcat(tmpPath, 'LI_04_rmanova_', sessionStr, '.mat');
   otherwise
     error('Something unexpected happend. part = %d is not defined' ...
           , part);
@@ -400,6 +412,24 @@ while sessionStatus == true
       end
     case 3
       LI_main_3;
+      selection = false;
+      while selection == false
+        fprintf('<strong>Continue data processing with:</strong>\n');
+        fprintf('<strong>[4] - Repeated measures ANOVA (rmANOVA)?</strong>\n');
+        x = input('\nSelect [y/n]: ','s');
+        if strcmp('y', x)
+          selection = true;
+          sessionStatus = true;
+          sessionPart = 4;
+        elseif strcmp('n', x)
+          selection = true;
+          sessionStatus = false;
+        else
+          selection = false;
+        end
+      end
+    case 4
+      LI_main_4;
       sessionStatus = false;
     otherwise
       sessionStatus = false;
