@@ -155,28 +155,28 @@ end
 clear tmpPath sessionListCopy userList match filePath cmdout attrib
 
 % -------------------------------------------------------------------------
-% General selection of dyads
+% General selection of participants
 % -------------------------------------------------------------------------
 selection = false;
 
 while selection == false
   fprintf('\nPlease select one option:\n');
-  fprintf('[1] - Process all available dyads\n');
-  fprintf('[2] - Process all new dyads\n');
-  fprintf('[3] - Process specific dyad\n');
+  fprintf('[1] - Process all available participants\n');
+  fprintf('[2] - Process all new participants\n');
+  fprintf('[3] - Process specific participant\n');
   fprintf('[4] - Quit data processing\n\n');
   x = input('Option: ');
   
   switch x
     case 1
       selection = true;
-      dyadsSpec = 'all';
+      participantsSpec = 'all';
     case 2
       selection = true;
-      dyadsSpec = 'new';
+      participantsSpec = 'new';
     case 3
       selection = true;
-      dyadsSpec = 'specific';
+      participantsSpec = 'specific';
     case 4
       fprintf('\nData processing aborted.\n');
       clear selection i x y srcPath desPath session sessionList ...
@@ -198,7 +198,7 @@ if session == 0
   part = 1;
 else
   while selection == false
-    fprintf('\nPlease select what you want to do with the selected dyads:\n');
+    fprintf('\nPlease select what you want to do with the selected participants:\n');
     fprintf('[1] - Data import, bad segments and pre-stimulus offset rejection\n');
     fprintf('[2] - Power analysis\n');
     fprintf('[3] - Averaging power over frequencies\n');
@@ -222,7 +222,7 @@ else
       case 5
         fprintf('\nData processing aborted.\n');
         clear selection i x y srcPath desPath session sessionList ...
-            sessionNum numOfSessions dyadsSpec sessionStr
+            sessionNum numOfSessions participantsSpec sessionStr
         return;
       otherwise
         selection = false;
@@ -232,7 +232,7 @@ else
 end
 
 % -------------------------------------------------------------------------
-% Specific selection of dyads
+% Specific selection of participants
 % -------------------------------------------------------------------------
 sourceList    = dir([srcPath, '/*Inkong_BL.vhdr']);
 sourceList    = struct2cell(sourceList);
@@ -280,7 +280,7 @@ if ~isequal(fileNamePre, 0)
       cprintf([1,0.5,0], ['Selected part [%d] can not be executed, no '...'
             'input data available\n Please choose a previous part.\n'], part);
       clear desPath fileNamePost fileNamePre fileNum i numOfSources ...
-            selection sourceList srcPath x y dyadsSpec fileListPre ... 
+            selection sourceList srcPath x y participantsSpec fileListPre ...
             sessionList sessionNum numOfSessions session part sessionStr ...
             tmpPath
       return;
@@ -295,9 +295,9 @@ if ~isequal(fileNamePre, 0)
     end
   end
 
-  if strcmp(dyadsSpec, 'all')                                               % process all participants
+  if strcmp(participantsSpec, 'all')                                        % process all participants
     numOfPart = sort(numOfPrePart);
-  elseif strcmp(dyadsSpec, 'specific')                                      % process specific participants
+  elseif strcmp(participantsSpec, 'specific')                               % process specific participants
     y = sprintf('%d ', sort(numOfPrePart));
     
     selection = false;
@@ -315,7 +315,7 @@ if ~isequal(fileNamePre, 0)
         numOfPart = x;
       end
     end
-  elseif strcmp(dyadsSpec, 'new')                                           % process only new participants
+  elseif strcmp(participantsSpec, 'new')                                    % process only new participants
     if session == 0
       numOfPart = numOfPrePart;
     else
@@ -334,13 +334,13 @@ if ~isequal(fileNamePre, 0)
   
       numOfPart = numOfPrePart(~ismember(numOfPrePart, numOfPostPart));
       if isempty(numOfPart)
-        cprintf([1,0.5,0], 'No new dyads available!\n');
+        cprintf([1,0.5,0], 'No new participants available!\n');
         fprintf('Data processing aborted.\n');
         clear desPath fileNamePost fileNamePre fileNum i numOfPrePart ...
-              numOfSources selection sourceList srcPath x y dyadsSpec ...
-              fileListPost fileListPre numOfPostPart sessionList ...
-              numOfFiles sessionNum numOfSessions session numOfPart ...
-              part sessionStr dyads tmpPath
+              numOfSources selection sourceList srcPath x y ...
+              participantsSpec fileListPost fileListPre numOfPostPart ...
+              sessionList numOfFiles sessionNum numOfSessions session ...
+              numOfPart part sessionStr participants tmpPath
         return;
       else
         numOfPart = sort(numOfPart);
@@ -354,14 +354,14 @@ if ~isequal(fileNamePre, 0)
   fprintf('%s\n\n', y);
 
   clear fileNamePost fileNamePre fileNum i numOfPrePart ...
-        numOfSources selection sourceList x y dyads fileListPost ...
+        numOfSources selection sourceList x y fileListPost ...
         fileListPre numOfPostPart sessionList sessionNum numOfSessions ...
-        session dyadsSpec numOfFiles tmpPath
+        session participantsSpec numOfFiles tmpPath
 else
   fprintf('\n');
   clear fileNamePost fileNamePre fileNum i numOfSources selection ...
-        sourceList x y dyads sessionList sessionNum numOfSessions ...
-        session dyadsSpec numOfFiles tmpPath
+        sourceList x y sessionList sessionNum numOfSessions ...
+        session participantsSpec numOfFiles tmpPath
 end
 
 % -------------------------------------------------------------------------

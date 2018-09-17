@@ -10,7 +10,7 @@ function [ cfgArtifacts ] = LI_databrowser( cfg, data )
 %
 % The configuration options are
 %   cfg.part        = number of participant (default: [])
-%   cfg.condition   = condition identifier, 'conf' or 'incong'
+%   cfg.condition   = condition identifier, 'cong' or 'incong'
 %   cfg.artifact    = Nx2 matrix with artifact segments (default: [])
 %   cfg.channel     = channels of interest (default: 'all')
 %   cfg.ylim        = vertical scaling (default: [-50 50]);
