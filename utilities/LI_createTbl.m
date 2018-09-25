@@ -38,9 +38,10 @@ end
 % -------------------------------------------------------------------------
 switch type
   case 'numoftrials'
-    T = table(1,0,0,{'unknown'},{'unknown'});
+    T = table(1,0,0,{'unknown'},{'unknown'},0,0);
     T.Properties.VariableNames = ...
-        {'participant', 'congNoT', 'incongNoT', 'congBad', 'incongBad'};
+        {'participant', 'congNoT', 'incongNoT', 'congBad', 'incongBad' ...
+          'congNogT', 'incongNogT'};
     filepath = [desFolder type '_' sessionStr '.xls'];
     writetable(T, filepath);
   otherwise

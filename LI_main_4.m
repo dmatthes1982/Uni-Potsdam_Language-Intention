@@ -123,7 +123,7 @@ if ~isempty(x)
   cfg.channel   = x;
 end
 
-fprintf('<strong>Run repeated measures analysis of variance with selected datasets...</strong>');
+fprintf('<strong>Run repeated measures analysis of variance with selected datasets...\n</strong>');
 data_rmanova  = LI_rmAnova(cfg, data_cong, data_incong);
 
 % export ANOVA results into *.mat files
@@ -135,7 +135,7 @@ cfg.sessionStr  = sessionStr;
 file_path = strcat(cfg.desFolder, cfg.filename, '_', cfg.sessionStr, ...
                    '.mat');
 
-fprintf('\nThe result of the repeated measures ANOVA will be saved in:\n'); 
+fprintf('The result of the repeated measures ANOVA will be saved in:\n');
 fprintf('%s ...\n', file_path);
 LI_saveData(cfg, 'data_rmanova', data_rmanova);
 fprintf('Data stored!\n');

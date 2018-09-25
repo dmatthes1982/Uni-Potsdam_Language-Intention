@@ -82,6 +82,12 @@ end
 if ~exist(strcat(desPath, '04_rmanova'), 'dir')
   mkdir(strcat(desPath, '04_rmanova'));
 end
+if ~exist(strcat(desPath, '05a_psdop'), 'dir')
+  mkdir(strcat(desPath, '05a_psdop'));
+end
+if ~exist(strcat(desPath, '05b_pwelchop'), 'dir')
+  mkdir(strcat(desPath, '05b_pwelchop'));
+end
 
 clear sessionStr numOfPart part newPaths
 
@@ -202,8 +208,9 @@ else
     fprintf('[1] - Data import, bad segments and pre-stimulus offset rejection\n');
     fprintf('[2] - Power analysis\n');
     fprintf('[3] - Averaging power over frequencies\n');
-    fprintf('[4] - Repeated measures ANOVA (rmANOVA)\n'); 
-    fprintf('[5] - Quit data processing\n\n');
+    fprintf('[4] - Repeated measures ANOVA (rmANOVA)\n');
+    fprintf('[5] - Averaging power over participants\n');
+    fprintf('[6] - Quit data processing\n\n');
     x = input('Option: ');
   
     switch x
@@ -220,6 +227,9 @@ else
         part = 4;
         selection = true;
       case 5
+        part = 5;
+        selection = true;
+      case 6
         fprintf('\nData processing aborted.\n');
         clear selection i x y srcPath desPath session sessionList ...
             sessionNum numOfSessions participantsSpec sessionStr
@@ -266,6 +276,11 @@ switch part
     fileNamePre = strcat(tmpPath, 'LI_incong_p*_03d_pwelch_avgpow7to9_', sessionStr, '.mat');
     tmpPath = strcat(desPath, '04_rmanova/');
     fileNamePost = strcat(tmpPath, 'LI_04_rmanova_', sessionStr, '.mat');
+  case 5
+    tmpPath = strcat(desPath, '02b_pwelch/');
+    fileNamePre = strcat(tmpPath, 'LI_incong_p*_02b_pwelch_', sessionStr, '.mat');
+    tmpPath = strcat(desPath, '05b_pwelchod/');
+    fileNamePost = strcat(tmpPath, 'LI_incong_p*_05b_pwelchod_', sessionStr, '.mat');
   otherwise
     error('Something unexpected happend. part = %d is not defined' ...
           , part);
@@ -430,6 +445,24 @@ while sessionStatus == true
       end
     case 4
       LI_main_4;
+      selection = false;
+      while selection == false
+        fprintf('<strong>Continue data processing with:</strong>\n');
+        fprintf('<strong>[5] - Averaging power over participants?</strong>\n');
+        x = input('\nSelect [y/n]: ','s');
+        if strcmp('y', x)
+          selection = true;
+          sessionStatus = true;
+          sessionPart = 5;
+        elseif strcmp('n', x)
+          selection = true;
+          sessionStatus = false;
+        else
+          selection = false;
+        end
+      end
+    case 5
+      LI_main_5;
       sessionStatus = false;
     otherwise
       sessionStatus = false;

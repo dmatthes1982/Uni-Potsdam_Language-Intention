@@ -154,8 +154,8 @@ for i = numOfPart
   % reject segments with bad intervals
   data_revised = LI_rejectBadIntervalArtifacts(data_import);
   
-  numOfTrialsInCong = length(data_import.trial);
-  IncongTrials      = 1:1:numOfTrialsInCong;
+  numOfTrialsIncong = length(data_import.trial);
+  IncongTrials      = 1:1:numOfTrialsIncong;
   IncongBadTrials   = IncongTrials(~ismember(IncongTrials, ...
                       data_revised.sampleinfo(:,2)/1500));
 
@@ -179,12 +179,14 @@ for i = numOfPart
   warning off;
   T.participant(i - 29) = i;
   T.congNoT(i - 29)     = numOfTrialsCong;
-  T.incongNoT(i - 29)   = numOfTrialsInCong;
+  T.incongNoT(i - 29)   = numOfTrialsIncong;
   T.congBad(i - 29)     = {vec2str(CongBadTrials, [], [], 0)};
   T.incongBad(i - 29)   = {vec2str(IncongBadTrials, [], [], 0)};
+  T.congNogT(i - 29)    = numOfTrialsCong - size(CongBadTrials, 2);
+  T.incongNogT(i - 29)  = numOfTrialsIncong - size(IncongBadTrials, 2);
   warning on;
 
-  clear numOfTrialsCong numOfTrialsInCong CongBadTrials IncongBadTrials ...
+  clear numOfTrialsCong numOfTrialsIncong CongBadTrials IncongBadTrials ...
         CongTrials IncongTrials
 
   % store settings table
