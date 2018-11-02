@@ -138,7 +138,7 @@ file_path = strcat(cfg.desFolder, cfg.filename, '_', cfg.sessionStr, ...
 fprintf('The result of the repeated measures ANOVA will be saved in:\n');
 fprintf('%s ...\n', file_path);
 LI_saveData(cfg, 'data_rmanova', data_rmanova);
-fprintf('Data stored!\n');
+fprintf('Data stored!\n\n');
 clear data_rmanova data_cong data_incong
 
 %% clear workspace
