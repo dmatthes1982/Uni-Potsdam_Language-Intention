@@ -36,7 +36,8 @@ cfg.showcallinfo    = 'no';                                                 % su
 % calculate power spectral density
 % -------------------------------------------------------------------------
 warning('off','all');
-data = ft_freqanalysis(cfg, data);                                          % calculate power spectral density
+data = ft_freqanalysis(cfg, data);                                          % calculate power spectrum
+data.powspctrm = data.powspctrm/data.freq(2);                               % estimate power spectral density
 warning('on','all');
 
 end

@@ -134,9 +134,13 @@ labelString = strjoin(data.label(elec), ',');
 % -------------------------------------------------------------------------
 fprintf('Plot signals...\n');
 figure();
-title(sprintf('%s - %s - %s', datasetID, condition, labelString));
+if length(elec) == 1
+  title(sprintf('%s - %s - %s', datasetID, condition, labelString));
+else
+  title(sprintf('%s - %s - %s (averaged)', datasetID, condition, labelString));
+end
 xlabel('frequency in Hz');                                                  % set xlabel
-ylabel('PSD in µV^2');                                                      % set ylabel
+ylabel('PSD in \muV^2 / Hz');                                               % set ylabel
 hold on;
 
 f = waitbar(0,'Please wait...');
@@ -147,7 +151,7 @@ for i = 1:1:numOfFiles
   eval(['data =' sprintf('data_%s', datasetID) ';']);
   eval(['clear ' sprintf('data_%s', datasetID)]);
   
-  plot(data.freq(begCol:endCol), data.powspctrm(elec, begCol:endCol));
+  plot(data.freq(begCol:endCol), mean(data.powspctrm(elec, begCol:endCol),1));
 
   clear data
 end
