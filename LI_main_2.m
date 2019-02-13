@@ -30,33 +30,33 @@ if ~exist('numOfPart', 'var')                                               % es
 end
 
 %% part 2
-% 1. estimate the power spectral density for each trial without 
-%    subsegmentation and average over trials.
-% 2. estimate the power spectral using Welch's method for each trial and
-%    average over trials. (segment length 1 sec, overlapping 60% --> each
-%    trial will be divided into 2 subsegments)
+% 1. estimate the power for each trial without subsegmentation and average
+%    over trials.
+% 2. estimate the power using Welch's method for each trial and average
+%    over trials. (segment length 1 sec, overlapping 60% --> each trial
+%    will be divided into 2 subsegments)
 
 cprintf([0,0.6,0], '<strong>[2] - Power analysis</strong>\n');
 fprintf('\n');
 
-%% power spectral density estimation without subsegmentation %%%%%%%%%%%%%%
+%% power estimation without subsegmentation %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 choise = false;
 while choise == false
-  cprintf([0,0.6,0], 'Do you want to estimate pure PSD?\n');
+  cprintf([0,0.6,0], 'Do you want to estimate pure power?\n');
   x = input('Select [y/n]: ','s');
   if strcmp('y', x)
     choise = true;
-    psd = true;
+    pow = true;
   elseif strcmp('n', x)
     choise = true;
-    psd = false;
+    pow = false;
   else
     choise = false;
   end
 end
 fprintf('\n');
 
-if psd == true
+if pow == true
   for i = numOfPart
     fprintf('<strong>Participant %d</strong>\n\n', i);
     
@@ -69,24 +69,24 @@ if psd == true
     fprintf('Load pruned congruent data...\n\n');
     LI_loadData( cfg );
 
-    % estimate power spectral density
-    fprintf('<strong>Estimate pure power spectral density...</strong>\n');
-    data_psd = LI_psd(data_pruned);
+    % estimate power
+    fprintf('<strong>Estimate pure power...</strong>\n');
+    data_pow = LI_pow(data_pruned);
     
-    % export psd data in a *.mat file
+    % export power data in a *.mat file
     cfg             = [];
-    cfg.desFolder   = strcat(desPath, '02a_psd/');
-    cfg.filename    = sprintf('LI_cong_p%02d_02a_psd', i);
+    cfg.desFolder   = strcat(desPath, '02a_pow/');
+    cfg.filename    = sprintf('LI_cong_p%02d_02a_pow', i);
     cfg.sessionStr  = sessionStr;
 
     file_path = strcat(cfg.desFolder, cfg.filename, '_', cfg.sessionStr, ...
                        '.mat');
 
-    fprintf('\nThe psd data of participant %d in the congruent condition will be saved in:\n', i); 
+    fprintf('\nThe power data of participant %d in the congruent condition will be saved in:\n', i);
     fprintf('%s ...\n', file_path);
-    LI_saveData(cfg, 'data_psd', data_psd);
+    LI_saveData(cfg, 'data_pow', data_pow);
     fprintf('Data stored!\n\n');
-    clear data_pruned data_psd
+    clear data_pruned data_pow
 
     % incongruent data ----------------------------------------------------
     cfg             = [];
@@ -97,31 +97,31 @@ if psd == true
     fprintf('Load pruned incongruent data...\n\n');
     LI_loadData( cfg );
     
-    % estimate power spectral density
-    fprintf('<strong>Estimate pure power spectral density...</strong>\n');
-    data_psd = LI_psd(data_pruned);
+    % estimate power
+    fprintf('<strong>Estimate pure power...</strong>\n');
+    data_pow = LI_pow(data_pruned);
     
-    % export psd data in a *.mat file
+    % export power data in a *.mat file
     cfg             = [];
-    cfg.desFolder   = strcat(desPath, '02a_psd/');
-    cfg.filename    = sprintf('LI_incong_p%02d_02a_psd', i);
+    cfg.desFolder   = strcat(desPath, '02a_pow/');
+    cfg.filename    = sprintf('LI_incong_p%02d_02a_pow', i);
     cfg.sessionStr  = sessionStr;
 
     file_path = strcat(cfg.desFolder, cfg.filename, '_', cfg.sessionStr, ...
                        '.mat');
 
-    fprintf('\nThe psd data of participant %d in the incongruent condition will be saved in:\n', i); 
+    fprintf('\nThe power data of participant %d in the incongruent condition will be saved in:\n', i);
     fprintf('%s ...\n', file_path);
-    LI_saveData(cfg, 'data_psd', data_psd);
+    LI_saveData(cfg, 'data_pow', data_pow);
     fprintf('Data stored!\n\n');
-    clear data_pruned data_psd
+    clear data_pruned data_pow
   end
 end
 
-%% power spectral density estimation using Welch's method %%%%%%%%%%%%%%%%%
+%% power estimation using Welch's method %%%%%%%%%%%%%%%%%
 choise = false;
 while choise == false
-  cprintf([0,0.6,0], 'Do you want to estimate PSD using Welch''s method?\n');
+  cprintf([0,0.6,0], 'Do you want to estimate power using Welch''s method?\n');
   x = input('Select [y/n]: ','s');
   if strcmp('y', x)
     choise = true;
@@ -156,11 +156,11 @@ if pwelch == true
     
     data_pruned = LI_segmentation( cfg, data_pruned );
     
-    % estimate power spectral density using Welch's method
-    fprintf('<strong>Estimate psd using Welch''s method...</strong>\n');
-    data_pwelch = LI_psd(data_pruned);
+    % estimate power using Welch's method
+    fprintf('<strong>Estimate power using Welch''s method...</strong>\n');
+    data_pwelch = LI_pow(data_pruned);
     
-    % export psd data in a *.mat file
+    % export power data in a *.mat file
     cfg             = [];
     cfg.desFolder   = strcat(desPath, '02b_pwelch/');
     cfg.filename    = sprintf('LI_cong_p%02d_02b_pwelch', i);
@@ -192,11 +192,11 @@ if pwelch == true
     
     data_pruned = LI_segmentation( cfg, data_pruned );
     
-    % estimate power spectral density using Welch's method
-    fprintf('<strong>Estimate psd using Welch''s method...</strong>\n');
-    data_pwelch = LI_psd(data_pruned);
+    % estimate power using Welch's method
+    fprintf('<strong>Estimate power using Welch''s method...</strong>\n');
+    data_pwelch = LI_pow(data_pruned);
     
-    % export psd data in a *.mat file
+    % export power data in a *.mat file
     cfg             = [];
     cfg.desFolder   = strcat(desPath, '02b_pwelch/');
     cfg.filename    = sprintf('LI_incong_p%02d_02b_pwelch', i);
@@ -205,7 +205,7 @@ if pwelch == true
     file_path = strcat(cfg.desFolder, cfg.filename, '_', cfg.sessionStr, ...
                        '.mat');
 
-    fprintf('\nThe pwelch data of participant %d in the incongruent condition will be saved in:\n', i); 
+    fprintf('\nThe pwelch data of participant %d in the incongruent condition will be saved in:\n', i);
     fprintf('%s ...\n', file_path);
     LI_saveData(cfg, 'data_pwelch', data_pwelch);
     fprintf('Data stored!\n\n');
@@ -214,4 +214,4 @@ if pwelch == true
 end
 
 %% clear workspace
-clear i cfg file_path psd pwelch choise x
+clear i cfg file_path pow pwelch choise x

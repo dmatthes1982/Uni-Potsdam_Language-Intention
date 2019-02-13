@@ -1,11 +1,10 @@
-function LI_easyPSDplot(cfg, data)
-% LI_EASYPSDPLOT is a function, which makes it easier to plot the power
-% spectral density.
+function LI_easyPowPlot(cfg, data)
+% LI_EASYPOWPLOT is a function, which makes it easier to plot the power.
 %
 % Use as
-%   LI_easyPSDplot(cfg, data)
+%   LI_easyPowPlot(cfg, data)
 %
-% where the input data have to be a result from LI_PSD.
+% where the input data have to be a result from LI_POW.
 %
 % The configuration options are 
 %   cfg.freqrange   = frequency range [fmin fmax], (default: [0 50])
@@ -15,9 +14,9 @@ function LI_easyPSDplot(cfg, data)
 %
 % This function requires the fieldtrip toolbox
 %
-% See also LI_PSD
+% See also LI_POW
 
-% Copyright (C) 2018, Daniel Matthes, MPI CBS
+% Copyright (C) 2018-2019, Daniel Matthes, MPI CBS
 
 % -------------------------------------------------------------------------
 % Get and check config options
@@ -52,19 +51,19 @@ else
 end
 
 % -------------------------------------------------------------------------
-% Plot power spectral density (PSD)
+% Plot power
 % -------------------------------------------------------------------------
 labelString = strjoin(data.label(elec), ',');
 
 if strcmp(avgchan, 'no')
   plot(data.freq(begCol:endCol), data.powspctrm(elec, begCol:endCol));
-  title(sprintf('PSD - Electrode.: %s', labelString));
+  title(sprintf('Power - Electrode.: %s', labelString));
 else
   plot(data.freq(begCol:endCol), mean(data.powspctrm(elec, begCol:endCol),1));
-  title(sprintf('PSD - Electrode.: %s (averaged)', labelString));
+  title(sprintf('Power - Electrode.: %s (averaged)', labelString));
 end
 
 xlabel('frequency in Hz');                                                  % set xlabel
-ylabel('PSD in \muV^2 / Hz');                                               % set ylabel
+ylabel('power in \muV^2');                                                  % set ylabel
 
 end

@@ -42,22 +42,22 @@ fprintf('\n');
 selection = false;
 while selection == false
   cprintf([0,0.6,0], 'Which result do you want to use for the analysis:\n');
-  fprintf('[1] - PSD result in a range from 6 to 9 Hz\n');
+  fprintf('[1] - Power result in a range from 6 to 9 Hz\n');
   fprintf('[2] - pWelch result in a range from 6 to 9 Hz\n');
-  fprintf('[3] - PSD result in a range from 7 to 9 Hz\n');
+  fprintf('[3] - Power result in a range from 7 to 9 Hz\n');
   fprintf('[4] - pWelch result in a range from 7 to 9 Hz\n');
   x = input('Option: ');
 
   switch x
     case 1
       selection = true;
-      filename = '03a_psd_avgpow6to9';
+      filename = '03a_pow_avgpow6to9';
     case 2
       selection = true;
       filename = '03b_pwelch_avgpow6to9';
     case 3
       selection = true;
-      filename = '03c_psd_avgpow7to9';
+      filename = '03c_pow_avgpow7to9';
     case 4
       selection = true;
       filename = '03d_pwelch_avgpow7to9';
@@ -82,8 +82,8 @@ for i = 1:1:length(numOfPart)
   fprintf('Load congruent data...\n');
   LI_loadData( cfg );
   
-  if exist('data_psdavg', 'var') 
-    data_cong{i} = data_psdavg;
+  if exist('data_powavg', 'var')
+    data_cong{i} = data_powavg;
   elseif exist('data_pwelchavg', 'var') 
     data_cong{i} = data_pwelchavg;
   end   
@@ -97,15 +97,15 @@ for i = 1:1:length(numOfPart)
   fprintf('Load incongruent data...\n');
   LI_loadData( cfg );
   
-  if exist('data_psdavg', 'var') 
-    data_incong{i} = data_psdavg;
+  if exist('data_powavg', 'var')
+    data_incong{i} = data_powavg;
   elseif exist('data_pwelchavg', 'var') 
     data_incong{i} = data_pwelchavg;
   end
   
 end
 
-clear data_psdavg data_pwelchavg
+clear data_powavg data_pwelchavg
 
 %% do repeated measures ANOVA %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 cprintf([0,0.6,0], '\nMake your channel selection in curly brackets.\n');

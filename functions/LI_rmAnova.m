@@ -11,16 +11,16 @@ function [data_rmanova] = LI_rmAnova(cfg, data_cong, data_incong)
 % The configuration options are
 %   cfg.numOfPart  = 1xN vector including all selected participant numbers
 %   cfg.ident      = dataset identifier, possible options are:
-%                     - 03a_psd_avgpow6to9
+%                     - 03a_pow_avgpow6to9
 %                     - 03b_pwelch_avgpow6to9
-%                     - 03c_psd_avgpow7to9
+%                     - 03c_pow_avgpow7to9
 %                     - 03d_pwelch_avgpow7to9
 %   cfg.channel    = 'all' or a specific selection (i.e. {'C3', 'P*', '*4', 'F3+F4'})
 %                       (default: {'F3','F4','Fz','C3','C4','Cz','P3','P4','Pz'})
 %
 % See also LI_CHANNELSELECTION, FITRM, ranova, epsilon, mauchly
 
-% Copyright (C) 2018, Daniel Matthes, MPI CBS
+% Copyright (C) 2018-2019, Daniel Matthes, MPI CBS
 
 % -------------------------------------------------------------------------
 % Get and check config options

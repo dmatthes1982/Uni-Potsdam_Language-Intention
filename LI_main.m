@@ -13,7 +13,7 @@ clear LASTN
 cprintf([0,0.6,0], '<strong>---------------------------------------------</strong>\n');
 cprintf([0,0.6,0], '<strong>Language & Intention - data processing</strong>\n');
 cprintf([0,0.6,0], '<strong>Version: 0.1</strong>\n');
-cprintf([0,0.6,0], 'Copyright (C) 2018, Daniel Matthes, MPI CBS\n');
+cprintf([0,0.6,0], 'Copyright (C) 2018-2019, Daniel Matthes, MPI CBS\n');
 cprintf([0,0.6,0], '<strong>---------------------------------------------</strong>\n');
 
 % -------------------------------------------------------------------------
@@ -61,20 +61,20 @@ end
 if ~exist(strcat(desPath, '01c_pruned'), 'dir')
   mkdir(strcat(desPath, '01c_pruned'));
 end
-if ~exist(strcat(desPath, '02a_psd'), 'dir')
-  mkdir(strcat(desPath, '02a_psd'));
+if ~exist(strcat(desPath, '02a_pow'), 'dir')
+  mkdir(strcat(desPath, '02a_pow'));
 end
 if ~exist(strcat(desPath, '02b_pwelch'), 'dir')
   mkdir(strcat(desPath, '02b_pwelch'));
 end
-if ~exist(strcat(desPath, '03a_psd_avgpow6to9'), 'dir')
-  mkdir(strcat(desPath, '03a_psd_avgpow6to9'));
+if ~exist(strcat(desPath, '03a_pow_avgpow6to9'), 'dir')
+  mkdir(strcat(desPath, '03a_pow_avgpow6to9'));
 end
 if ~exist(strcat(desPath, '03b_pwelch_avgpow6to9'), 'dir')
   mkdir(strcat(desPath, '03b_pwelch_avgpow6to9'));
 end
-if ~exist(strcat(desPath, '03c_psd_avgpow7to9'), 'dir')
-  mkdir(strcat(desPath, '03c_psd_avgpow7to9'));
+if ~exist(strcat(desPath, '03c_pow_avgpow7to9'), 'dir')
+  mkdir(strcat(desPath, '03c_pow_avgpow7to9'));
 end
 if ~exist(strcat(desPath, '03d_pwelch_avgpow7to9'), 'dir')
   mkdir(strcat(desPath, '03d_pwelch_avgpow7to9'));
@@ -82,8 +82,8 @@ end
 if ~exist(strcat(desPath, '04_rmanova'), 'dir')
   mkdir(strcat(desPath, '04_rmanova'));
 end
-if ~exist(strcat(desPath, '05a_psdop'), 'dir')
-  mkdir(strcat(desPath, '05a_psdop'));
+if ~exist(strcat(desPath, '05a_powop'), 'dir')
+  mkdir(strcat(desPath, '05a_powop'));
 end
 if ~exist(strcat(desPath, '05b_pwelchop'), 'dir')
   mkdir(strcat(desPath, '05b_pwelchop'));

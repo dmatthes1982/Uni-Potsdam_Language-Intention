@@ -30,9 +30,9 @@ if ~exist('numOfPart', 'var')                                               % es
 end
 
 %% part 3
-% 1. estimate power average in the range from 6 to 9 Hz using data_psd
+% 1. estimate power average in the range from 6 to 9 Hz using data_pow
 % 3. estimate power average in the range from 6 to 9 Hz using data_pwelch
-% 2. estimate power average in the range from 7 to 9 Hz using data_psd
+% 2. estimate power average in the range from 7 to 9 Hz using data_pow
 % 4. estimate power average in the range from 7 to 9 Hz using data_pwelch
 
 cprintf([0,0.6,0], '<strong>[3] - Averaging power over frequencies</strong>\n');
@@ -44,11 +44,11 @@ for i = numOfPart
   
   % congruent data --------------------------------------------------------
   cfg             = [];
-  cfg.srcFolder   = strcat(desPath, '02a_psd/');
-  cfg.filename    = sprintf('LI_cong_p%02d_02a_psd', i);
+  cfg.srcFolder   = strcat(desPath, '02a_pow/');
+  cfg.filename    = sprintf('LI_cong_p%02d_02a_pow', i);
   cfg.sessionStr  = sessionStr;
 
-  fprintf('Load congruent psd data...\n');
+  fprintf('Load congruent power data...\n');
   LI_loadData( cfg );
   
   cfg             = [];
@@ -64,23 +64,23 @@ for i = numOfPart
   cfg           = [];
   cfg.freqrange = [5.7 9.3];
   
-  data_psdavg     = LI_powerAverage(cfg, data_psd);
+  data_powavg     = LI_powerAverage(cfg, data_pow);
   data_pwelchavg  = LI_powerAverage(cfg, data_pwelch);
   
   % export averaged data into *.mat files
   cfg             = [];
-  cfg.desFolder   = strcat(desPath, '03a_psd_avgpow6to9/');
-  cfg.filename    = sprintf('LI_cong_p%02d_03a_psd_avgpow6to9', i);
+  cfg.desFolder   = strcat(desPath, '03a_pow_avgpow6to9/');
+  cfg.filename    = sprintf('LI_cong_p%02d_03a_pow_avgpow6to9', i);
   cfg.sessionStr  = sessionStr;
 
   file_path = strcat(cfg.desFolder, cfg.filename, '_', cfg.sessionStr, ...
                      '.mat');
 
-  fprintf('\nThe averaged power (data_psd, 6-9 Hz) of participant %d in the congruent condition will be saved in:\n', i); 
+  fprintf('\nThe averaged power (data_pow, 6-9 Hz) of participant %d in the congruent condition will be saved in:\n', i);
   fprintf('%s ...\n', file_path);
-  LI_saveData(cfg, 'data_psdavg', data_psdavg);
+  LI_saveData(cfg, 'data_powavg', data_powavg);
   fprintf('Data stored!\n');
-  clear data_psdavg
+  clear data_powavg
   
   cfg             = [];
   cfg.desFolder   = strcat(desPath, '03b_pwelch_avgpow6to9/');
@@ -90,7 +90,7 @@ for i = numOfPart
   file_path = strcat(cfg.desFolder, cfg.filename, '_', cfg.sessionStr, ...
                      '.mat');
 
-  fprintf('The averaged power (data_pwelch, 6-9 Hz) of participant %d in the congruent condition will be saved in:\n', i); 
+  fprintf('The averaged power (data_pwelch, 6-9 Hz) of participant %d in the congruent condition will be saved in:\n', i);
   fprintf('%s ...\n', file_path);
   LI_saveData(cfg, 'data_pwelchavg', data_pwelchavg);
   fprintf('Data stored!\n\n');
@@ -101,23 +101,23 @@ for i = numOfPart
   cfg           = [];
   cfg.freqrange = [7 9.3];
   
-  data_psdavg     = LI_powerAverage(cfg, data_psd);
+  data_powavg     = LI_powerAverage(cfg, data_pow);
   data_pwelchavg  = LI_powerAverage(cfg, data_pwelch);
   
   % export averaged data into *.mat files
   cfg             = [];
-  cfg.desFolder   = strcat(desPath, '03c_psd_avgpow7to9/');
-  cfg.filename    = sprintf('LI_cong_p%02d_03c_psd_avgpow7to9', i);
+  cfg.desFolder   = strcat(desPath, '03c_pow_avgpow7to9/');
+  cfg.filename    = sprintf('LI_cong_p%02d_03c_pow_avgpow7to9', i);
   cfg.sessionStr  = sessionStr;
 
   file_path = strcat(cfg.desFolder, cfg.filename, '_', cfg.sessionStr, ...
                      '.mat');
 
-  fprintf('\nThe averaged power (data_psd, 7-9 Hz) of participant %d in the congruent condition will be saved in:\n', i); 
+  fprintf('\nThe averaged power (data_pow, 7-9 Hz) of participant %d in the congruent condition will be saved in:\n', i);
   fprintf('%s ...\n', file_path);
-  LI_saveData(cfg, 'data_psdavg', data_psdavg);
+  LI_saveData(cfg, 'data_powavg', data_powavg);
   fprintf('Data stored!\n');
-  clear data_psdavg data_psd
+  clear data_powavg data_pow
   
   cfg             = [];
   cfg.desFolder   = strcat(desPath, '03d_pwelch_avgpow7to9/');
@@ -127,7 +127,7 @@ for i = numOfPart
   file_path = strcat(cfg.desFolder, cfg.filename, '_', cfg.sessionStr, ...
                      '.mat');
 
-  fprintf('The averaged power (data_pwelch, 7-9 Hz) of participant %d in the congruent condition will be saved in:\n', i); 
+  fprintf('The averaged power (data_pwelch, 7-9 Hz) of participant %d in the congruent condition will be saved in:\n', i);
   fprintf('%s ...\n', file_path);
   LI_saveData(cfg, 'data_pwelchavg', data_pwelchavg);
   fprintf('Data stored!\n\n');
@@ -135,11 +135,11 @@ for i = numOfPart
   
   % incongruent data ------------------------------------------------------
   cfg             = [];
-  cfg.srcFolder   = strcat(desPath, '02a_psd/');
-  cfg.filename    = sprintf('LI_incong_p%02d_02a_psd', i);
+  cfg.srcFolder   = strcat(desPath, '02a_pow/');
+  cfg.filename    = sprintf('LI_incong_p%02d_02a_pow', i);
   cfg.sessionStr  = sessionStr;
 
-  fprintf('Load incongruent psd data...\n');
+  fprintf('Load incongruent power data...\n');
   LI_loadData( cfg );
   
   cfg             = [];
@@ -155,23 +155,23 @@ for i = numOfPart
   cfg           = [];
   cfg.freqrange = [5.7 9.3];
   
-  data_psdavg     = LI_powerAverage(cfg, data_psd);
+  data_powavg     = LI_powerAverage(cfg, data_pow);
   data_pwelchavg  = LI_powerAverage(cfg, data_pwelch);
   
   % export averaged data into *.mat files
   cfg             = [];
-  cfg.desFolder   = strcat(desPath, '03a_psd_avgpow6to9/');
-  cfg.filename    = sprintf('LI_incong_p%02d_03a_psd_avgpow6to9', i);
+  cfg.desFolder   = strcat(desPath, '03a_pow_avgpow6to9/');
+  cfg.filename    = sprintf('LI_incong_p%02d_03a_pow_avgpow6to9', i);
   cfg.sessionStr  = sessionStr;
 
   file_path = strcat(cfg.desFolder, cfg.filename, '_', cfg.sessionStr, ...
                      '.mat');
 
-  fprintf('\nThe averaged power (data_psd, 6-9 Hz) of participant %d in the incongruent condition will be saved in:\n', i); 
+  fprintf('\nThe averaged power (data_pow, 6-9 Hz) of participant %d in the incongruent condition will be saved in:\n', i);
   fprintf('%s ...\n', file_path);
-  LI_saveData(cfg, 'data_psdavg', data_psdavg);
+  LI_saveData(cfg, 'data_powavg', data_powavg);
   fprintf('Data stored!\n');
-  clear data_psdavg
+  clear data_powavg
   
   cfg             = [];
   cfg.desFolder   = strcat(desPath, '03b_pwelch_avgpow6to9/');
@@ -181,7 +181,7 @@ for i = numOfPart
   file_path = strcat(cfg.desFolder, cfg.filename, '_', cfg.sessionStr, ...
                      '.mat');
 
-  fprintf('\nThe averaged power (data_pwelch, 6-9 Hz) of participant %d in the incongruent condition will be saved in:\n', i); 
+  fprintf('\nThe averaged power (data_pwelch, 6-9 Hz) of participant %d in the incongruent condition will be saved in:\n', i);
   fprintf('%s ...\n', file_path);
   LI_saveData(cfg, 'data_pwelchavg', data_pwelchavg);
   fprintf('Data stored!\n\n');
@@ -192,23 +192,23 @@ for i = numOfPart
   cfg           = [];
   cfg.freqrange = [7 9.3];
   
-  data_psdavg     = LI_powerAverage(cfg, data_psd);
+  data_powavg     = LI_powerAverage(cfg, data_pow);
   data_pwelchavg  = LI_powerAverage(cfg, data_pwelch);
   
   % export averaged data into *.mat files
   cfg             = [];
-  cfg.desFolder   = strcat(desPath, '03c_psd_avgpow7to9/');
-  cfg.filename    = sprintf('LI_incong_p%02d_03c_psd_avgpow7to9', i);
+  cfg.desFolder   = strcat(desPath, '03c_pow_avgpow7to9/');
+  cfg.filename    = sprintf('LI_incong_p%02d_03c_pow_avgpow7to9', i);
   cfg.sessionStr  = sessionStr;
 
   file_path = strcat(cfg.desFolder, cfg.filename, '_', cfg.sessionStr, ...
                      '.mat');
 
-  fprintf('\nThe averaged power (data_psd, 7-9 Hz) of participant %d in the incongruent condition will be saved in:\n', i); 
+  fprintf('\nThe averaged power (data_pow, 7-9 Hz) of participant %d in the incongruent condition will be saved in:\n', i);
   fprintf('%s ...\n', file_path);
-  LI_saveData(cfg, 'data_psdavg', data_psdavg);
+  LI_saveData(cfg, 'data_powavg', data_powavg);
   fprintf('Data stored!\n');
-  clear data_psdavg data_psd
+  clear data_powavg data_pow
   
   cfg             = [];
   cfg.desFolder   = strcat(desPath, '03d_pwelch_avgpow7to9/');
@@ -218,7 +218,7 @@ for i = numOfPart
   file_path = strcat(cfg.desFolder, cfg.filename, '_', cfg.sessionStr, ...
                      '.mat');
 
-  fprintf('The averaged power (data_pwelch, 7-9 Hz) of participant %d in the incongruent condition will be saved in:\n', i); 
+  fprintf('The averaged power (data_pwelch, 7-9 Hz) of participant %d in the incongruent condition will be saved in:\n', i);
   fprintf('%s ...\n', file_path);
   LI_saveData(cfg, 'data_pwelchavg', data_pwelchavg);
   fprintf('Data stored!\n\n');

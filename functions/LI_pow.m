@@ -1,9 +1,9 @@
-function [ data ] = LI_psd( data )
-% LI_PSD estimates the power spectral density for all trials of the dataset
-% and averages the results over all existing trials.
+function [ data ] = LI_pow( data )
+% LI_POW estimates the power for all trials of the dataset and averages the
+% results over all existing trials.
 %
 % Use as 
-%   [ data ] = LI_psd( data )
+%   [ data ] = LI_pow( data )
 %
 % where the input data has to be either the result of LI_PRUNESEGMENTS or 
 % LI_SEGMENTATION.
@@ -12,10 +12,10 @@ function [ data ] = LI_psd( data )
 %
 % See also FT_FREQANALYSIS
 
-% Copyright (C) 2018, Daniel Matthes, MPI CBS
+% Copyright (C) 2018-2019, Daniel Matthes, MPI CBS
 
 % -------------------------------------------------------------------------
-% psd settings
+% power settings
 % -------------------------------------------------------------------------
 fsample = data.fsample;
 L       = length(data.time{1});
@@ -33,11 +33,10 @@ cfg.feedback        = 'no';                                                 % su
 cfg.showcallinfo    = 'no';                                                 % suppress function call output
 
 % -------------------------------------------------------------------------
-% calculate power spectral density
+% calculate power
 % -------------------------------------------------------------------------
 warning('off','all');
 data = ft_freqanalysis(cfg, data);                                          % calculate power spectrum
-data.powspctrm = data.powspctrm/data.freq(2);                               % estimate power spectral density
 warning('on','all');
 
 end

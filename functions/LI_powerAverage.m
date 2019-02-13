@@ -5,14 +5,14 @@ function [ data ] = LI_powerAverage( cfg ,data )
 % Use as
 %   LI_powerAverage(cfg, data)
 %
-% where the input data has to be a result of LI_PSD
+% where the input data has to be a result of LI_POW
 %
 % The configuration options are
 %   cfg.freqrange = frequency range [fmin fmax] (default: [7 9]
 %
 % This function requires the fieldtrip toolbox
 
-% Copyright (C) 2018, Daniel Matthes, MPI CBS
+% Copyright (C) 2018-2019, Daniel Matthes, MPI CBS
 
 % -------------------------------------------------------------------------
 % Get and check config options

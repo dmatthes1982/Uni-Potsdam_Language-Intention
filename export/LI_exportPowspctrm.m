@@ -4,13 +4,13 @@ function LI_exportPowspctrm( data )
 % Use as
 %   LI_exportPowspctrm( data )
 %
-% where the input data have to be a result of LI_PSD.
+% where the input data have to be a result of LI_POW.
 %
 % This function requires the fieldtrip toolbox
 %
-% See also LI_PSD
+% See also LI_POW
 
-% Copyright (C) 2018, Daniel Matthes, MPI CBS
+% Copyright (C) 2018-2019, Daniel Matthes, MPI CBS
 
 % -------------------------------------------------------------------------
 % Get and check input data

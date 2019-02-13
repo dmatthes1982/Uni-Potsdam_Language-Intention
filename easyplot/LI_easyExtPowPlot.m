@@ -1,11 +1,11 @@
-function LI_easyExtPSDplot(cfg)
-% LI_EASYEXTPSDPLOT is a function, which makes it easier to plot the power
-% spectral density of multiple participants in one graphik.
+function LI_easyExtPowPlot(cfg)
+% LI_EASYEXTPOWPLOT is a function, which makes it easier to plot the power
+% of multiple participants in one graphik.
 %
 % Use as
-%   LI_easyExtPSDplot(cfg)
+%   LI_easyExtPowPlot(cfg)
 %
-% where the input data have to be a result from LI_PSD.
+% where the input data have to be a result from LI_POW.
 %
 % The configuration options are
 %   cfg.sessionStr  = session string (default: '001')
@@ -16,9 +16,9 @@ function LI_easyExtPSDplot(cfg)
 %
 % This function requires the fieldtrip toolbox
 %
-% See also LI_PSD
+% See also LI_POW
 
-% Copyright (C) 2018, Daniel Matthes, MPI CBS
+% Copyright (C) 2018-2019, Daniel Matthes, MPI CBS
 
 % -------------------------------------------------------------------------
 % Get config options
@@ -43,7 +43,7 @@ fprintf('Select source folder from your data storage!\n');
 selection = false;
 srcPath = pwd;
 while(selection == false)
-  fprintf('Choose either 02a_psd or 02b_pwelch!\n\n');
+  fprintf('Choose either 02a_pow or 02b_pwelch!\n\n');
 
   srcPath = uigetdir(srcPath, 'Select Source Folder...');
   if strcmp(computer, 'GLNXA64')
@@ -60,7 +60,7 @@ while(selection == false)
   folderID = folderID{end-1};
 
   switch folderID
-    case '02a_psd'
+    case '02a_pow'
       selection = true;
     case '02b_pwelch'
       selection = true;
@@ -130,7 +130,7 @@ end
 labelString = strjoin(data.label(elec), ',');
 
 % -------------------------------------------------------------------------
-% Plot power spectral density (PSD)
+% Plot power
 % -------------------------------------------------------------------------
 fprintf('Plot signals...\n');
 figure();
@@ -140,7 +140,7 @@ else
   title(sprintf('%s - %s - %s (averaged)', datasetID, condition, labelString));
 end
 xlabel('frequency in Hz');                                                  % set xlabel
-ylabel('PSD in \muV^2 / Hz');                                               % set ylabel
+ylabel('power in \muV^2');                                                  % set ylabel
 hold on;
 
 f = waitbar(0,'Please wait...');
